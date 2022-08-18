@@ -1,2 +1,4 @@
 # pruebaJava_EY
-prueba java
+Api para el registro de usuarios
+
+Trabaja con base de datos en memoria
