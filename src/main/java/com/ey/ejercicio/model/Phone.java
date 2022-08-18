@@ -1,49 +1,55 @@
 package com.ey.ejercicio.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name="phones")
+@Table(name="phones",
+		uniqueConstraints = {
+		@UniqueConstraint(columnNames = "id") })
 public class Phone {
 	
 	@Id	
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id_phone;
+	private int id_phone;	
 	
-	@Column(name = "id_user")
-	private int id_user;
-	
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name="id", referencedColumnName="id", nullable = false)
+	private User user;
+
 	@Column(name = "number", length = 10)
 	private String number;
 	
-	@Column(name = "citycode", length = 5)
-	private String citycode;
-	
-	@Column(name = "contrycode", length = 2)
-	private String contrycode;
-	
-	public int getIdPhone() {
+	public int getId_phone() {
 		return id_phone;
 	}
 
-
-	public void setIdPhone(int id_phone) {
+	public void setId_phone(int id_phone) {
 		this.id_phone = id_phone;
 	}
 
-		
-	public int getIdUser() {
-		return id_user;
+	public User getUser() {
+		return user;
 	}
 
-	public void setIdUser(int id_user) {
-		this.id_user = id_user;
+	public void setUser(User user) {
+		this.user = user;
 	}
+
+	@Column(name = "citycode", length = 5)
+	private String citycode;
+	
+	@Column(name = "countrycode", length = 2)
+	private String countrycode;	
 	
 	public String getNumber() {
 		return number;
@@ -52,21 +58,20 @@ public class Phone {
 	public void setNumber(String number) {
 		this.number = number;
 	}
-	
+
 	public String getCitycode() {
 		return citycode;
 	}
 
-	public void setCityCode(String citycode) {
+	public void setCitycode(String citycode) {
 		this.citycode = citycode;
 	}
-	
-	public String getContrycode() {
-		return contrycode;
+
+	public String getCountrycode() {
+		return countrycode;
 	}
 
-	public void setContrycode(String contrycode) {
-		this.contrycode = contrycode;
-	}
-
+	public void setCountrycode(String countrycode) {
+		this.countrycode = countrycode;
+	}	
 }

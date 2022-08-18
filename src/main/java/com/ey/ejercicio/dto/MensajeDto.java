@@ -1,12 +1,11 @@
-package com.ey.ejercicio.model;
+package com.ey.ejercicio.dto;
 
-public class Error {
+public class MensajeDto {
 	private String mensaje;
 	
 	public void setMensaje(String mensaje) {
 		this.mensaje = mensaje;
 	}
-
 		
 	public String getMensaje() {
 		return mensaje;

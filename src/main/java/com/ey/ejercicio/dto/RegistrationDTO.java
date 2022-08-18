@@ -1,36 +1,24 @@
 package com.ey.ejercicio.dto;
 
-import java.util.List;
-
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
-public class UserDto {
+public class RegistrationDTO {
 	
-	private Long id;
-	
-	@NotEmpty(message = "Debe completar el nombre")	
+	@NotEmpty(message = "El nombew no debe ser vacío")	
 	@Size(min = 8, message = "EL nombre de usuario debe tener un mínimo de 8 carácteres")
 	private String username;
-
-	@NotEmpty(message = "Debe completar el email")
+	
+	@NotEmpty(message = "El email no debe ser vacío")	
 	@Email
 	private String email;
 	
-	@NotEmpty(message = "Debe completar el password")
+	@NotEmpty
+	@Size(min = 8, message = "La contraseña debe tener un mínimo de 8 carácteres")
 	private String password;
 	
-    private List<PhonesDto> phones;
-	
-    public Long getId() {
-		return id;
-	}
-    
-	public void setId(Long id) {
-		this.id = id;
-	}
-	
+
 	public String getUsername() {
 		return username;
 	}
@@ -38,29 +26,25 @@ public class UserDto {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	
+
 	public String getEmail() {
 		return email;
 	}
-	
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
 	public String getPassword() {
 		return password;
-	}
-	
+	}  
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	public List<PhonesDto> getPhones() {
-		return phones;
+
+	public RegistrationDTO() {
+		super();
 	}
-	
-	public void setPhones(List<PhonesDto> phones) {
-		this.phones = phones;
-	}	
 
 }

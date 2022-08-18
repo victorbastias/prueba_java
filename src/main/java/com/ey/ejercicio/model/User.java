@@ -1,73 +1,72 @@
 package com.ey.ejercicio.model;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinTable;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import javax.persistence.*;
+
 
 @Entity
 @Table(name="user",
 		uniqueConstraints = { 
-		@UniqueConstraint(columnNames = "name"),
+		@UniqueConstraint(columnNames = "username"),
 		@UniqueConstraint(columnNames = "email") })
 public class User{
+	
 	@Id	
 	@GeneratedValue(strategy = GenerationType.IDENTITY)	
-	private Long idUser;
-	@Column(name = "name", length = 50)	
-	private String name;	
+	private Long id;
+	@Column(name = "username", length = 50)	
+	private String username;	
 	
 	
 	@Column(name = "email", length = 150)
 	private String email;
 	
-	@Column(name = "password", length = 50)
+
+	@Column(name = "password", length = 250)
 	private String password;
 	
-	@Column(name = "created", length = 20)
+	@Column(name = "created", length = 30)
 	private String created;
-	
-	@Column(name = "last_login", length = 20)
+
+	@Column(name = "last_login", length = 30)
 	private String last_login;
 	
-	@Column(name = "last_update", length = 20)
-	private String last_update;
+	@Column(name = "modified", length = 30)
+	private String modified;
 	
-	@Column(name = "is_active")
-	private Boolean is_active;
+	@Column(name = "isactive")
+	private Boolean isactive;
 	
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH, targetEntity = Phone.class)
-	@JoinTable(	name = "phones", 
-	joinColumns = @JoinColumn(name = "user_id") 
-	)
-    private Phone phones;	
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+	private Set<Roles> roles = new HashSet<>();
+
+	//@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, targetEntity = Phone.class)
+	//@JoinTable(	name = "phones", joinColumns = @JoinColumn(name = "id_user"))
+	//@JsonProperty(access = Access.WRITE_ONLY)
+	@OneToMany(cascade=CascadeType.ALL,mappedBy="user")
+    private List<Phone> phones;	
 
 	
-	public Long getIdUser() {
-		return idUser;
+	public Long getId() {
+		return id;
 	}
 
 
-	public void setIdUser(Long idUser) {
-		this.idUser = idUser;
+	public void setId(Long id) {
+		this.id = id;
+	}	
+	
+	public String getUsername() {
+		return username;
 	}
 
 
-	public String getName() {
-		return name;
-	}
-
-
-	public void setName(String name) {
-		this.name = name;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 
@@ -99,6 +98,15 @@ public class User{
 	public void setCreated(String created) {
 		this.created = created;
 	}
+	
+	public String getModified() {
+		return modified;
+	}
+
+
+	public void setModified(String modified) {
+		this.modified = modified;
+	}
 
 	public String getLast_login() {
 		return last_login;
@@ -109,30 +117,36 @@ public class User{
 		this.last_login = last_login;
 	}
 	
-	public String getLast_update() {
-		return last_update;
+	public Boolean getIsactive() {
+		return isactive;
 	}
 
 
-	public void setLast_update(String last_update) {
-		this.last_update = last_update;
-	}
-	
-	public Boolean getIs_active() {
-		return is_active;
+	public void setIsactive(Boolean isactive) {
+		this.isactive = isactive;
 	}
 
 
-	public void setIs_active(Boolean is_active) {
-		this.is_active = is_active;
-	}
-
-	public Phone getPhones() {
+	public List<Phone> getPhones() {
 		return phones;
 	}
 
 
-	public void setPhones(Phone phones) {
+	public void setPhones(List<Phone> phones) {
 		this.phones = phones;
-	}	
+	}
+	
+	 public void addToPhoneList(Phone phone) {
+		 phone.setUser(this);
+		 this.phones.add(phone);
+
+	 }
+	
+	public Set<Roles> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Roles> role) {
+		this.roles = role;
+	}
 }
