@@ -25,4 +25,8 @@ public class JWTAuthResonseDTO {
 		super();
 		this.tokenAccess = tokenAccess;
 	}
+
+    public String getToken() {
+		return tokenAccess;
+    }
 }

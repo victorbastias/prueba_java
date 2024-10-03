@@ -33,7 +33,7 @@ import java.util.*;
 public class AuthController {	
 	
 	@Autowired
-	private AuthenticationManager authenticationManagerBean;
+	private AuthenticationManager authenticationManager;
 	
 	@Autowired
 	private UserRepository userRepository;
@@ -53,7 +53,7 @@ public class AuthController {
 	
 	@PostMapping("/v1/login")
 	public ResponseEntity<JWTAuthResonseDTO> authenticateUser(@Valid @RequestBody LoginDTO loginDTO){
-		Authentication authentication = authenticationManagerBean.authenticate(new UsernamePasswordAuthenticationToken(loginDTO.getUsernameOrEmail(), loginDTO.getPassword()));
+		Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginDTO.getUsernameOrEmail(), loginDTO.getPassword()));
 		
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		
@@ -91,11 +91,10 @@ public class AuthController {
 		userRepository.save(user);
 		response = modelMapper.map(user, ResponseDto.class);
 		
-		Authentication authentication = authenticationManagerBean.authenticate(new UsernamePasswordAuthenticationToken(userDto.getEmail(), userDto.getPassword()));		
+		Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userDto.getEmail(), userDto.getPassword()));
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		response.setToken(jwtTokenProvider.generateToken(authentication));
-	
-		mensaje.setMensaje("Usuario registrado exitosamente");
-		return new ResponseEntity<Object>(response, HttpStatus.OK);
+
+		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 }
