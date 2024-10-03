@@ -9,6 +9,6 @@ import com.ey.ejercicio.model.Roles;
 
 public interface RolesRepository extends JpaRepository<Roles, Long>{
 
-	public Optional<Roles> findByName(String name);
+	Optional<Roles> findByName(String name);
 	
 }
