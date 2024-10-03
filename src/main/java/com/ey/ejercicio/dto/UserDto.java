@@ -1,24 +1,28 @@
 package com.ey.ejercicio.dto;
 
-import java.util.List;
+import com.ey.util.ValidPassword;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 public class UserDto {
 	
 	private Long id;
 	
 	@NotEmpty(message = "Debe completar el nombre")	
-	@Size(min = 8, message = "EL nombre de usuario debe tener un mínimo de 8 carácteres")
+	@Size(min = 8, max = 50)
 	private String username;
 
 	@NotEmpty(message = "Debe completar el email")
-	@Email
+	@Email(message = "El formato del email no es válido")
+	@Size(max = 150)
 	private String email;
 	
 	@NotEmpty(message = "Debe completar el password")
+	@Size(min = 8, max = 150)
+	@ValidPassword
 	private String password;
 	
     private List<PhonesDto> phones;

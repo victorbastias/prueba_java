@@ -1,6 +1,9 @@
 package com.ey.ejercicio.configuration;
 
-import org.aspectj.weaver.ast.And;
+import com.ey.ejercicio.security.CustomUserDetailsService;
+import com.ey.ejercicio.security.JwtAuthenticationEntryPoint;
+import com.ey.ejercicio.security.JwtAuthenticationFilter;
+import com.ey.util.RolEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,17 +15,9 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
-import com.ey.ejercicio.security.CustomUserDetailsService;
-import com.ey.ejercicio.security.JwtAuthenticationEntryPoint;
-import com.ey.ejercicio.security.JwtAuthenticationFilter;
 
 
 @Configuration
@@ -56,7 +51,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		    .sessionManagement()
 		    .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 		    .and()
-		    .authorizeRequests().antMatchers(HttpMethod.GET, "/api/**").permitAll()
+		    .authorizeRequests()
+			.antMatchers(HttpMethod.GET, "/api/**").permitAll()
+			.antMatchers(HttpMethod.POST, "/api/roles/v1/save").hasRole(RolEnum.ADMIN.name())
 		    .antMatchers("/api/auth/**").permitAll()
 		    .anyRequest()
 		    .authenticated();

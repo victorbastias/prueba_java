@@ -1,8 +1,16 @@
 package com.ey.ejercicio.dto;
 
+import javax.validation.constraints.Size;
+
 public class PhonesDto {
+
+	@Size(max = 10)
 	private String number;
+
+	@Size(max = 5)
 	private String citycode;
+
+	@Size(max = 2)
 	private String countrycode;
 	
 	public String getNumber() {

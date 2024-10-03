@@ -6,7 +6,7 @@ plugins {
 
 group = 'com.ey'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '1.8'
+sourceCompatibility = '17' // Cambiado a Java 17
 
 repositories {
 	mavenCentral()
@@ -14,19 +14,17 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.springframework.boot:spring-boot-starter-web'	
-	implementation 'org.springframework.boot:spring-boot-starter-security:2.7.2'	
-	implementation 'io.jsonwebtoken:jjwt:0.9.1'	
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'io.jsonwebtoken:jjwt:0.9.1'
 	implementation 'org.modelmapper:modelmapper:3.1.0'
-	implementation 'org.springframework.boot:spring-boot-starter-validation:2.7.2'	
-	//implementation 'org.springframework.boot:spring-boot-devtools:2.7.2'	
-	//implementation 'org.springframework.security:spring-security-core:5.7.2'
-	
-			
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	//implementation 'org.springframework.boot:spring-boot-devtools' // Descomentar si se desea usar durante el desarrollo
+
 	runtimeOnly 'org.hsqldb:hsqldb'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
-tasks.named('test') { 
+tasks.named('test') {
 	useJUnitPlatform()
 }

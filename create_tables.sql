@@ -1,3 +1,9 @@
+create table roles (
+        id INTEGER identity,
+        name varchar(60),
+        primary key (id)
+);
+
 CREATE TABLE user(
 	id_user INTEGER identity,
 	email varchar(50) not null,
@@ -17,5 +23,4 @@ CREATE TABLE phones (
     citycode varchar(5) not null,
     contrycode varchar(2) not null,
 	FOREIGN KEY (id_user) REFERENCES user(id_user)
-
 );

@@ -1,17 +1,16 @@
 package com.ey.ejercicio.services;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Optional;
-
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.ey.ejercicio.dto.ResponseDto;
 import com.ey.ejercicio.dto.UserDto;
 import com.ey.ejercicio.model.User;
 import com.ey.ejercicio.repository.UserRepository;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Optional;
 
 @Service
 public class UserServices{

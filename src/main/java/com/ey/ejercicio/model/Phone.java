@@ -1,16 +1,6 @@
 package com.ey.ejercicio.model;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.*;
 
 @Entity
 @Table(name="phones",
@@ -28,7 +18,13 @@ public class Phone {
 
 	@Column(name = "number", length = 10)
 	private String number;
-	
+
+	@Column(name = "citycode", length = 5)
+	private String citycode;
+
+	@Column(name = "countrycode", length = 2)
+	private String countrycode;
+
 	public int getId_phone() {
 		return id_phone;
 	}
@@ -44,12 +40,6 @@ public class Phone {
 	public void setUser(User user) {
 		this.user = user;
 	}
-
-	@Column(name = "citycode", length = 5)
-	private String citycode;
-	
-	@Column(name = "countrycode", length = 2)
-	private String countrycode;	
 	
 	public String getNumber() {
 		return number;

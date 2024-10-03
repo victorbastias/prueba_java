@@ -1,11 +1,6 @@
 package com.ey.ejercicio.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "roles")
@@ -38,6 +33,9 @@ public class Roles {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
+
+	public Roles(String name) {
+		this.name = name;
+	}
 
 }

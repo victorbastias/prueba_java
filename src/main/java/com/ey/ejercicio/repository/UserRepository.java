@@ -1,10 +1,9 @@
 package com.ey.ejercicio.repository;
 
-import java.util.Optional;
-
+import com.ey.ejercicio.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.ey.ejercicio.model.User;
+import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Long>{
 
