@@ -89,6 +89,7 @@ public class AuthController {
 		lstPhones.forEach(user::addToPhoneList);
 		
 		userRepository.save(user);
+		user.setId(UUID.randomUUID().getMostSignificantBits());
 		response = modelMapper.map(user, ResponseDto.class);
 		
 		Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userDto.getEmail(), userDto.getPassword()));
