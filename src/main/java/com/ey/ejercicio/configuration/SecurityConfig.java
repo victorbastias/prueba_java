@@ -52,23 +52,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		    .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 		    .and()
 		    .authorizeRequests()
-			.antMatchers(HttpMethod.GET, "/api/**").permitAll()
-			.antMatchers(HttpMethod.POST, "/api/roles/v1/save").hasRole(RolEnum.ADMIN.name())
+			.antMatchers(HttpMethod.GET, "/api/roles/v1/getAll").hasAuthority(RolEnum.NORMAL.name())
+			.antMatchers(HttpMethod.POST, "/api/roles/v1/save").hasAuthority(RolEnum.NORMAL.name())
+			.antMatchers(HttpMethod.GET, "/api/user/v1/getAll").hasAuthority(RolEnum.NORMAL.name())
 		    .antMatchers("/api/auth/**").permitAll()
 		    .anyRequest()
 		    .authenticated();
 		http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
-		
-		
-		//basic auth (nombre de usuario y contraseña)		 
-		/*
-		http.csrf().disable()	    
-	    .authorizeRequests().antMatchers(HttpMethod.GET, "/api/**").permitAll()	    
-	    .anyRequest()
-	    .authenticated()
-	    .and()
-	    .httpBasic();
-	    */	    	
 	}
 
 

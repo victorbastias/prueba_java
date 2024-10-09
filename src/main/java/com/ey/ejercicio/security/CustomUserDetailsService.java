@@ -22,11 +22,12 @@ public class CustomUserDetailsService implements UserDetailsService{
 	private UserRepository userRepository;
 	
 	@Override
-	public UserDetails loadUserByUsername(String usernameOrEmail) throws UsernameNotFoundException {
-		 com.ey.ejercicio.model.User user = userRepository.findByUsernameOrEmail(usernameOrEmail, usernameOrEmail)
-				.orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado con ese username o email : " + usernameOrEmail));
-	
-		return new User(user.getEmail(), user.getPassword(), mapRoles(user.getRoles()));
+	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+		 final var user = userRepository.findByEmail(email);
+		 if(user.isPresent()){
+			 return new User(user.get().getEmail(), user.get().getPassword(), mapRoles(user.get().getRoles()));
+		 }
+		 throw  new UsernameNotFoundException("Usuario no encontrado");
 	}
 
 	private Collection<? extends GrantedAuthority> mapRoles(Set<Roles> roles){
