@@ -77,6 +77,7 @@ public class AuthController {
 		String fechaActual = formatter.format(date);
 		
 		User user = modelMapper.map(userDto, User.class);
+		//user.setName(userDto.getName());
 		user.setPassword(passwordEncoder.encode(userDto.getPassword()));
 		user.setIsactive(true);
 		user.setCreated(fechaActual);		

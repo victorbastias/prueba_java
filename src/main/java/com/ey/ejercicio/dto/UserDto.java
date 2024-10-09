@@ -13,7 +13,7 @@ public class UserDto {
 	
 	@NotEmpty(message = "Debe completar el nombre")	
 	@Size(min = 8, max = 50)
-	private String username;
+	private String name;
 
 	@NotEmpty(message = "Debe completar el email")
 	@Email(message = "El formato del email no es válido")
@@ -35,12 +35,12 @@ public class UserDto {
 		this.id = id;
 	}
 	
-	public String getUsername() {
-		return username;
+	public String getName() {
+		return name;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	public String getEmail() {

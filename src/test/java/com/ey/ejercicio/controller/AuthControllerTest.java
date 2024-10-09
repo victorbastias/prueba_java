@@ -110,13 +110,13 @@ class AuthControllerTest {
     @Test
     void registerUser_ShouldRegisterUser_WhenEmailIsUnique() {
         UserDto userDto = new UserDto();
-        userDto.setUsername("Usertest");
+        userDto.setName("Usertest");
         userDto.setEmail("test@example.com");
         userDto.setPassword("password");
         userDto.setPhones(lstPhones);
 
         User user = new User();
-        user.setUsername(userDto.getUsername());
+        user.setName(userDto.getName());
         user.setEmail(userDto.getEmail());
 
         when(userRepository.existsByEmail(userDto.getEmail())).thenReturn(false);

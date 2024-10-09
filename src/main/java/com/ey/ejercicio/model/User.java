@@ -9,15 +9,15 @@ import java.util.Set;
 @Entity
 @Table(name="user",
 		uniqueConstraints = { 
-		@UniqueConstraint(columnNames = "username"),
+		@UniqueConstraint(columnNames = "name"),
 		@UniqueConstraint(columnNames = "email") })
 public class User{
 	
 	@Id	
 	@GeneratedValue(strategy = GenerationType.IDENTITY)	
 	private Long id;
-	@Column(name = "username", length = 50)	
-	private String username;
+	@Column(name = "name", length = 50)
+	private String name;
 	
 	@Column(name = "email", length = 150)
 	private String email;
@@ -54,13 +54,13 @@ public class User{
 		this.id = id;
 	}	
 	
-	public String getUsername() {
-		return username;
+	public String getName() {
+		return name;
 	}
 
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 
