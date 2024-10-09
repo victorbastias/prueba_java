@@ -34,11 +34,11 @@ public class RolesController {
 	@PostMapping("/v1/save")
 	public ResponseEntity<Object> save(@RequestBody RolesDto rolDto){		
 		
-		MensajeDto error = new MensajeDto();		
+		MensajeDto mensaje = new MensajeDto();
 		Optional<Roles> roles = roleRepository.findByName(rolDto.getName());
 		if(roles.isPresent()) {
-			error.setMensaje("El rol "+ rolDto.getName() + " ya existe");
-			return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+			mensaje.setMensaje("El rol "+ rolDto.getName() + " ya existe");
+			return new ResponseEntity<>(mensaje, HttpStatus.BAD_REQUEST);
 		}
 		Roles rol = modelMapper.map(rolDto, Roles.class);				
 		roleRepository.save(rol);
